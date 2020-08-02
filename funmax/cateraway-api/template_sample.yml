@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Cateraway APIs
+Resources:
+  OrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: bin/orders
+      Runtime: go1.x
+      Role: ''
+      Environment:
+        Variables:
+          GO_ENV: localhost
+          DB_HOST: 
+          DB_PORT: 
+          DB_USER: 
+          DB_PASSWORD: 
+          DB_Name: 
+      Events:
+        Order:
+          Type: Api
+          Properties:
+            Path: /orders
+            Method: any
+  FoodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: bin/food
+      Runtime: go1.x
+      Role: ''
+      Environment:
+        Variables:
+          GO_ENV: localhost
+          DB_HOST: 
+          DB_PORT: ''
+          DB_USER: 
+          DB_PASSWORD: 
+          DB_Name: 
+      Events:
+        Food:
+          Type: Api
+          Properties:
+            Path: /food
+            Method: any

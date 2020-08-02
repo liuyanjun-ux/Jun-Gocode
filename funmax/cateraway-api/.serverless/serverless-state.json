@@ -1,0 +1,787 @@
+{
+  "service": {
+    "service": "cateraway-api",
+    "serviceObject": {
+      "name": "cateraway-api"
+    },
+    "provider": {
+      "stage": "dev",
+      "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*]+?)}",
+      "name": "aws",
+      "runtime": "go1.x",
+      "region": "ap-east-1/cygdrive/d/projects/funmax/cateraway-api/",
+      "role": "arn:aws:iam::975327489460:role/lambda-vpc-execution-role",
+      "vpc": {
+        "securityGroupIds": [
+          "sg-076cf479da1afa5ac",
+          "sg-0af2e6ff28d9e7e6f"
+        ],
+        "subnetIds": [
+          "subnet-0c5be6a28d5ee3a7b",
+          "subnet-05a81734973e41530"
+        ]
+      },
+      "environment": {
+        "IAM": "arn:aws:iam::975327489460:role/lambda-vpc-execution-role",
+        "SG1": "sg-076cf479da1afa5ac",
+        "SG2": "sg-0af2e6ff28d9e7e6f",
+        "SUBNET1": "subnet-0c5be6a28d5ee3a7b",
+        "SUBNET2": "subnet-05a81734973e41530",
+        "GO_ENV": "development",
+        "DB_HOST": "funmax-dev.cif4cr0qz4qv.ap-east-1.rds.amazonaws.com",
+        "DB_PORT": "3306",
+        "DB_USER": "admin",
+        "DB_PASSWORD": "Cs&uN&X3Yy9V",
+        "DB_Name": "cateraway"
+      },
+      "versionFunctions": true,
+      "remoteFunctionData": null,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "AuthorizeLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/cateraway-api-dev-authorize"
+            }
+          },
+          "FoodLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/cateraway-api-dev-food"
+            }
+          },
+          "OrdersLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/cateraway-api-dev-orders"
+            }
+          },
+          "AuthorizeLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/cateraway-api/dev/1571809127650-2019-10-23T05:38:47.650Z/cateraway-api.zip"
+              },
+              "FunctionName": "cateraway-api-dev-authorize",
+              "Handler": "bin/auth",
+              "MemorySize": 1024,
+              "Role": "arn:aws:iam::975327489460:role/lambda-vpc-execution-role",
+              "Runtime": "go1.x",
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "IAM": "arn:aws:iam::975327489460:role/lambda-vpc-execution-role",
+                  "SG1": "sg-076cf479da1afa5ac",
+                  "SG2": "sg-0af2e6ff28d9e7e6f",
+                  "SUBNET1": "subnet-0c5be6a28d5ee3a7b",
+                  "SUBNET2": "subnet-05a81734973e41530",
+                  "GO_ENV": "development",
+                  "DB_HOST": "funmax-dev.cif4cr0qz4qv.ap-east-1.rds.amazonaws.com",
+                  "DB_PORT": "3306",
+                  "DB_USER": "admin",
+                  "DB_PASSWORD": "Cs&uN&X3Yy9V",
+                  "DB_Name": "cateraway"
+                }
+              },
+              "VpcConfig": {
+                "SecurityGroupIds": [
+                  "sg-076cf479da1afa5ac",
+                  "sg-0af2e6ff28d9e7e6f"
+                ],
+                "SubnetIds": [
+                  "subnet-0c5be6a28d5ee3a7b",
+                  "subnet-05a81734973e41530"
+                ]
+              }
+            },
+            "DependsOn": [
+              "AuthorizeLogGroup"
+            ]
+          },
+          "AuthorizeLambdaVersionCLNODdAEjzf1ojLCSpFzTM7Zfcf4L3TOtmCbr2CoA": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "AuthorizeLambdaFunction"
+              },
+              "CodeSha256": "Nz5f91lq1dK2kE2ahMtXmOo1rXu9/4a9ZLZAz+elRsI="
+            }
+          },
+          "FoodLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/cateraway-api/dev/1571809127650-2019-10-23T05:38:47.650Z/cateraway-api.zip"
+              },
+              "FunctionName": "cateraway-api-dev-food",
+              "Handler": "bin/food",
+              "MemorySize": 1024,
+              "Role": "arn:aws:iam::975327489460:role/lambda-vpc-execution-role",
+              "Runtime": "go1.x",
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "IAM": "arn:aws:iam::975327489460:role/lambda-vpc-execution-role",
+                  "SG1": "sg-076cf479da1afa5ac",
+                  "SG2": "sg-0af2e6ff28d9e7e6f",
+                  "SUBNET1": "subnet-0c5be6a28d5ee3a7b",
+                  "SUBNET2": "subnet-05a81734973e41530",
+                  "GO_ENV": "development",
+                  "DB_HOST": "funmax-dev.cif4cr0qz4qv.ap-east-1.rds.amazonaws.com",
+                  "DB_PORT": "3306",
+                  "DB_USER": "admin",
+                  "DB_PASSWORD": "Cs&uN&X3Yy9V",
+                  "DB_Name": "cateraway"
+                }
+              },
+              "VpcConfig": {
+                "SecurityGroupIds": [
+                  "sg-076cf479da1afa5ac",
+                  "sg-0af2e6ff28d9e7e6f"
+                ],
+                "SubnetIds": [
+                  "subnet-0c5be6a28d5ee3a7b",
+                  "subnet-05a81734973e41530"
+                ]
+              }
+            },
+            "DependsOn": [
+              "FoodLogGroup"
+            ]
+          },
+          "FoodLambdaVersionOB5e3OfZmlqHQTRGmbpAery0xDxr1bZydanWpLU2g": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "FoodLambdaFunction"
+              },
+              "CodeSha256": "Nz5f91lq1dK2kE2ahMtXmOo1rXu9/4a9ZLZAz+elRsI="
+            }
+          },
+          "OrdersLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/cateraway-api/dev/1571809127650-2019-10-23T05:38:47.650Z/cateraway-api.zip"
+              },
+              "FunctionName": "cateraway-api-dev-orders",
+              "Handler": "bin/orders",
+              "MemorySize": 1024,
+              "Role": "arn:aws:iam::975327489460:role/lambda-vpc-execution-role",
+              "Runtime": "go1.x",
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "IAM": "arn:aws:iam::975327489460:role/lambda-vpc-execution-role",
+                  "SG1": "sg-076cf479da1afa5ac",
+                  "SG2": "sg-0af2e6ff28d9e7e6f",
+                  "SUBNET1": "subnet-0c5be6a28d5ee3a7b",
+                  "SUBNET2": "subnet-05a81734973e41530",
+                  "GO_ENV": "development",
+                  "DB_HOST": "funmax-dev.cif4cr0qz4qv.ap-east-1.rds.amazonaws.com",
+                  "DB_PORT": "3306",
+                  "DB_USER": "admin",
+                  "DB_PASSWORD": "Cs&uN&X3Yy9V",
+                  "DB_Name": "cateraway"
+                }
+              },
+              "VpcConfig": {
+                "SecurityGroupIds": [
+                  "sg-076cf479da1afa5ac",
+                  "sg-0af2e6ff28d9e7e6f"
+                ],
+                "SubnetIds": [
+                  "subnet-0c5be6a28d5ee3a7b",
+                  "subnet-05a81734973e41530"
+                ]
+              }
+            },
+            "DependsOn": [
+              "OrdersLogGroup"
+            ]
+          },
+          "OrdersLambdaVersionJgcMxRE8EuQDqVnmleEAKmV5vReNV3JbFz8BPRpeg": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "OrdersLambdaFunction"
+              },
+              "CodeSha256": "Nz5f91lq1dK2kE2ahMtXmOo1rXu9/4a9ZLZAz+elRsI="
+            }
+          },
+          "ApiGatewayRestApi": {
+            "Type": "AWS::ApiGateway::RestApi",
+            "Properties": {
+              "Name": "dev-cateraway-api",
+              "EndpointConfiguration": {
+                "Types": [
+                  "EDGE"
+                ]
+              }
+            }
+          },
+          "ApiGatewayResourceFood": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "food",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceOrders": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "orders",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodFoodOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true,
+                    "method.response.header.Access-Control-Allow-Credentials": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
+                      "method.response.header.Access-Control-Allow-Credentials": "'false'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceFood"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodOrdersOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true,
+                    "method.response.header.Access-Control-Allow-Credentials": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
+                      "method.response.header.Access-Control-Allow-Credentials": "'false'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceOrders"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodFoodGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceFood"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "FoodLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodOrdersGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceOrders"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "CUSTOM",
+              "AuthorizerId": {
+                "Ref": "AuthorizeApiGatewayAuthorizer"
+              },
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "OrdersLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": "AuthorizeApiGatewayAuthorizer"
+          },
+          "AuthorizeApiGatewayAuthorizer": {
+            "Type": "AWS::ApiGateway::Authorizer",
+            "Properties": {
+              "AuthorizerResultTtlInSeconds": 0,
+              "IdentitySource": "method.request.header.Authorization",
+              "Name": "authorize",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "AuthorizerUri": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":apigateway:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":lambda:path/2015-03-31/functions/",
+                    {
+                      "Fn::GetAtt": [
+                        "AuthorizeLambdaFunction",
+                        "Arn"
+                      ]
+                    },
+                    "/invocations"
+                  ]
+                ]
+              },
+              "Type": "TOKEN"
+            }
+          },
+          "ApiGatewayDeployment1571809126366": {
+            "Type": "AWS::ApiGateway::Deployment",
+            "Properties": {
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "StageName": "dev"
+            },
+            "DependsOn": [
+              "ApiGatewayMethodFoodOptions",
+              "ApiGatewayMethodOrdersOptions",
+              "ApiGatewayMethodFoodGet",
+              "ApiGatewayMethodOrdersGet"
+            ]
+          },
+          "FoodLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "FoodLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "OrdersLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "OrdersLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "AuthorizeLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "AuthorizeLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com"
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          },
+          "AuthorizeLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "AuthorizeLambdaVersionCLNODdAEjzf1ojLCSpFzTM7Zfcf4L3TOtmCbr2CoA"
+            }
+          },
+          "FoodLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "FoodLambdaVersionOB5e3OfZmlqHQTRGmbpAery0xDxr1bZydanWpLU2g"
+            }
+          },
+          "OrdersLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "OrdersLambdaVersionJgcMxRE8EuQDqVnmleEAKmV5vReNV3JbFz8BPRpeg"
+            }
+          },
+          "ServiceEndpoint": {
+            "Description": "URL of the service endpoint",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "https://",
+                  {
+                    "Ref": "ApiGatewayRestApi"
+                  },
+                  ".execute-api.",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix"
+                  },
+                  "/dev"
+                ]
+              ]
+            }
+          }
+        }
+      },
+      "coreCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      }
+    },
+    "pluginsData": {},
+    "functions": {
+      "authorize": {
+        "handler": "bin/auth",
+        "events": [],
+        "name": "cateraway-api-dev-authorize",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "go1.x",
+        "vpc": {}
+      },
+      "food": {
+        "handler": "bin/food",
+        "events": [
+          {
+            "http": {
+              "path": "food",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "cateraway-api-dev-food",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "go1.x",
+        "vpc": {}
+      },
+      "orders": {
+        "handler": "bin/orders",
+        "events": [
+          {
+            "http": {
+              "path": "orders",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY",
+              "authorizer": {
+                "name": "authorize",
+                "arn": {
+                  "Fn::GetAtt": [
+                    "AuthorizeLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "resultTtlInSeconds": 0,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              }
+            }
+          }
+        ],
+        "name": "cateraway-api-dev-orders",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "go1.x",
+        "vpc": {}
+      }
+    },
+    "serviceFilename": "serverless.yml",
+    "layers": {},
+    "artifact": "D:\\projects\\funmax\\cateraway-api\\.serverless\\cateraway-api.zip"
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/cateraway-api/dev/1571809127650-2019-10-23T05:38:47.650Z",
+    "artifact": "cateraway-api.zip"
+  }
+}

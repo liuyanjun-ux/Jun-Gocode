@@ -1,0 +1,25 @@
+dev:
+  IAM:
+  SG1: sg-076cf479da1afa5ac
+  SG2: sg-0af2e6ff28d9e7e6f
+  SUBNET1: subnet-0c5be6a28d5ee3a7b
+  SUBNET2: subnet-05a81734973e41530
+  GO_ENV: development
+  DB_HOST:
+  DB_PORT:
+  DB_USER:
+  DB_PASSWORD:
+  DB_Name:
+
+prod:
+  IAM:
+  SG1: sg-076cf479da1afa5ac
+  SG2: sg-0af2e6ff28d9e7e6f
+  SUBNET1: subnet-0c5be6a28d5ee3a7b
+  SUBNET2: subnet-05a81734973e41530
+  GO_ENV: production
+  DB_HOST:
+  DB_PORT:
+  DB_USER: 
+  DB_PASSWORD: 
+  DB_Name: 
